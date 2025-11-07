@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移动端分类侧边栏测试</title>
+    <style>
+        /* 全局重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* 确保字体在移动设备上正确渲染 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        /* 简单的页面内容 */
+        .page-content {
+            padding: 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        /* 切换按钮 */
+        #categoryToggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #667eea;
+            color: white;
+            font-size: 24px;
+            border: none;
+            z-index: 100;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* 遮罩层 */
+        #categoryOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+        
+        /* 侧边栏 */
+        #mobileCategorySidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            height: 100%;
+            background: white;
+            z-index: 999;
+            transition: left 0.3s ease;
+            overflow-y: auto;
+        }
+        
+        /* 侧边栏头部 */
+        .sidebar-header {
+            padding: 20px;
+            background: #667eea;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .sidebar-header h3 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        #closeCategory {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* 分类内容区域 */
+        .category-content {
+            padding: 20px;
+        }
+        
+        /* 分类项 - 高对比度样式 */
+        .category-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            border: 2px solid #ddd;
+        }
+        
+        /* 活动分类 */
+        .category-item.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        /* 普通分类 */
+        .category-item.normal {
+            background: white;
+            color: black;
+            border-color: #ddd;
+        }
+        
+        /* 测试区域 */
+        .test-area {
+            background: yellow;
+            color: red;
+            padding: 30px;
+            margin-top: 30px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            border: 3px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-content">
+        <h1>移动端分类侧边栏测试页面</h1>
+        <p>点击右下角按钮打开分类侧边栏</p>
+    </div>
+    
+    <!-- 移动端分类侧边栏 -->
+    <button id="categoryToggle">
+        ☰
+    </button>
+    
+    <div id="categoryOverlay"></div>
+    
+    <div id="mobileCategorySidebar">
+        <!-- 侧边栏头部 -->
+        <div class="sidebar-header">
+            <h3>商品分类</h3>
+            <button id="closeCategory">×</button>
+        </div>
+        
+        <!-- 分类列表 -->
+        <div class="category-content">
+            <div class="category-item active">全部商品</div>
+            <div class="category-item normal">服装鞋帽</div>
+            <div class="category-item normal">电子产品</div>
+            <div class="category-item normal">食品饮料</div>
+            <div class="category-item normal">家居生活</div>
+            
+            <!-- 明显的测试区域 -->
+            <div class="test-area">
+                测试文字区域 - 应该清晰可见
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 获取DOM元素
+        const categoryToggle = document.getElementById('categoryToggle');
+        const categoryOverlay = document.getElementById('categoryOverlay');
+        const mobileCategorySidebar = document.getElementById('mobileCategorySidebar');
+        const closeCategory = document.getElementById('closeCategory');
+        
+        // 打开侧边栏
+        function openSidebar() {
+            console.log('打开侧边栏');
+            mobileCategorySidebar.style.left = '0';
+            categoryOverlay.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // 关闭侧边栏
+        function closeSidebar() {
+            console.log('关闭侧边栏');
+            mobileCategorySidebar.style.left = '-100%';
+            categoryOverlay.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+        
+        // 绑定事件
+        categoryToggle.addEventListener('click', openSidebar);
+        closeCategory.addEventListener('click', closeSidebar);
+        categoryOverlay.addEventListener('click', closeSidebar);
+        
+        // 添加分类项点击事件
+        const categoryItems = document.querySelectorAll('.category-item');
+        categoryItems.forEach(item => {
+            item.addEventListener('click', function() {
+                // 移除所有活动状态
+                categoryItems.forEach(i => {
+                    i.classList.remove('active');
+                    i.classList.add('normal');
+                });
+                
+                // 设置当前为活动状态
+                this.classList.remove('normal');
+                this.classList.add('active');
+                
+                console.log('选择分类:', this.textContent.trim());
+                
+                // 关闭侧边栏
+                closeSidebar();
+            });
+        });
+        
+        console.log('测试页面加载完成');
+    </script>
+</body>
+</html>
