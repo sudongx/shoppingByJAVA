@@ -1,0 +1,51 @@
+server:
+  port: 8080
+  main:
+    web-application-type: reactive
+
+spring:
+  application:
+    name: gateway
+
+  cloud:
+    nacos:
+      server-addr: 47.112.106.211:8848
+    gateway:
+      httpserver:
+        wiretap: true
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin
+        - AddResponseHeader=Access-Control-Allow-Origin,*
+        - PreserveHostHeader
+        - SetResponseHeader=Content-Type,application/json
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOriginPatterns: "http://localhost:18080,http://47.112.106.211:18080"
+            allowedMethods: "GET, POST, PUT, DELETE, OPTIONS"
+            allowedHeaders: "*"
+            allowCredentials: true
+      routes:
+        - id: product
+          uri: lb://product-list
+          predicates:
+            - Path=/product/**
+          filters:
+            - AddResponseHeader=Content-Type,application/json;charset=UTF-8
+
+        - id: cart
+          uri: lb://cart-service
+          predicates:
+            - Path=/cart/**
+          filters:
+            - AddResponseHeader=Content-Type,application/json;charset=UTF-8
+
+        - id: user
+          uri: lb://user-login
+          predicates:
+            - Path=/users/**
+          filters:
+            - AddResponseHeader=Content-Type,application/json;charset=UTF-8
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
