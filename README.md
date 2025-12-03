@@ -1,6 +1,6 @@
 # ShoppingByJAVA
 
-> 基于 Java 微服务架构的模拟购物商城
+> 模拟购物商城，前端是纯三件套和开源的cdn，后端Java程序，Spring 生态组件和微服务架构，数据库MySQL
 
 [![GitHub Stars](https://img.shields.io/github/stars/sudongx/shoppingByJAVA?style=social)](https://github.com/sudongx/shoppingByJAVA/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/sudongx/shoppingByJAVA?style=social)](https://github.com/sudongx/shoppingByJAVA/network/members)
@@ -8,7 +8,7 @@
 
 ---
 
-## 📖 项目简介
+## 项目简介
 
 **以 **Java 技术栈** 为核心开发的模拟购物商城系统，主要用于提供 **交流与学习 Web 后端开发思路**。  
 项目模拟了电商平台的基本业务流程，包括用户登录注册、商品展示、购物车管理、订单结算等功能模块。  
@@ -21,7 +21,7 @@
 
 ---
 
-## 🧩 技术栈
+## 技术栈
 
 | 模块 | 技术 |
 |:--:|:--|
@@ -33,17 +33,17 @@
 
 ---
 
-## 🛠️ 功能模块
+## 功能模块
 
-- 👤 **用户模块**：注册、登录、个人信息管理  
-- 🛍️ **商品模块**：商品浏览、分类、搜索  
-- 🛒 **购物车模块**：添加、修改、删除购物项  
-- 💳 **订单模块**：下单、查看订单、支付模拟  
-- ⚙️ **后台管理**（可选）：商品与用户的基础管理功能
+-  **用户模块**：注册、登录、个人信息管理  
+-  **商品模块**：商品浏览、分类、搜索  
+-  **购物车模块**：添加、修改、删除购物项  
+-  **订单模块**：下单、查看订单、支付模拟  
+-  **后台管理**（可选）：商品与用户的基础管理功能
 
 ---
 
-## 🧠 学习价值
+## 学习价值
 
 本项目适合以下学习方向的开发者：
 
@@ -53,13 +53,13 @@
 - 练习 **Linux 环境下的部署与调试**；
 - 探索 **Nginx + Tomcat 多层部署结构**。
 
-> 💡 **注意：** 本项目仅用于技术学习与个人练习，不作为商业用途。
+> **注意：** 本项目仅用于技术学习与个人练习，不作为商业用途。
 
 ---
 
-## 🚀 快速开始
+## 快速开始
 
-### 1️⃣ 克隆项目
+### 克隆项目
 ```bash
 git clone https://github.com/sudongx/shoppingByJAVA.git
 cd shoppingByJAVA
